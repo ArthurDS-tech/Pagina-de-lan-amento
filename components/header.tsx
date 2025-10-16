@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
+import { AuthModal } from "./auth-modal";
 
 export const Header = () => {
   return (
@@ -10,19 +11,21 @@ export const Header = () => {
           <Logo className="w-[100px] md:w-[120px]" />
         </Link>
         <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
-          {["About", "Portfolio", "Insights", "Contact"].map((item) => (
+          {["home", "about", "services", "contact"].map((item, index) => (
             <Link
               className="uppercase inline-block font-mono text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
               href={`#${item.toLowerCase()}`}
-              key={item}
+              key={`nav-${index}-${item}`}
             >
               {item}
             </Link>
           ))}
         </nav>
-        <Link className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-mono text-primary hover:text-primary/80" href="/#sign-in">
-          Sign In
-        </Link>
+        <AuthModal>
+          <button className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-mono text-primary hover:text-primary/80">
+            Sign In
+          </button>
+        </AuthModal>
         <MobileMenu />
       </header>
     </div>
